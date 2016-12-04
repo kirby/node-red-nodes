@@ -54,15 +54,25 @@ module.exports = function(RED) {
         }
         var node = this;
 
+//         var smtpTransport = nodemailer.createTransport({
+//             host: node.outserver,
+//             port: node.outport,
+//             secure: true,
+//             auth: {
+//                 user: node.userid,
+//                 pass: node.password
+//             }
+//         });
+        
         var smtpTransport = nodemailer.createTransport({
             host: node.outserver,
             port: node.outport,
-            secure: true,
-            auth: {
-                user: node.userid,
-                pass: node.password
-            }
+            secure: false
         });
+        
+        node.log("smtpTransport:\n");
+        node.log("-------------");
+        node.log(smtpTransport);
 
         this.on("input", function(msg) {
             if (msg.hasOwnProperty("payload")) {
